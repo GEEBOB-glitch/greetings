@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Draw Greeting</title>
+<style>
+  body {
+    text-align: center;
+    font-family: Arial;
+  }
+  canvas {
+    border: 1px solid black;
+  }
+</style>
+</head>
+
+<body>
+
+<h2>Draw Greeting</h2>
+
+<input type="text" id="nameInput" placeholder="Enter your name">
+<button onclick="startDrawing()">Start</button>
+
+<br><br>
+
+<canvas id="canvas" width="300" height="300"></canvas>
+
+<script>
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+let name = "";
+let interval;
+
+function startDrawing() {
+  name = document.getElementById("nameInput").value;
+  
+  if(interval) clearInterval(interval);
+
+  interval = setInterval(draw, 500);
+}
+
+function draw() {
+
+  let x = Math.random() * 300;
+  let y = Math.random() * 300;
+
+  ctx.fillStyle = "white";
+  ctx.fillRect(0,0,300,300);
+
+  ctx.fillStyle = "red";
+  ctx.font = "20px Arial";
+  ctx.fillText("Hiiii, " + name, x, y);
+}
+</script>
+
+</body>
+</html>
