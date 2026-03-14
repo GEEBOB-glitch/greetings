@@ -7,16 +7,31 @@
 
 body{
     font-family: Arial, sans-serif;
-    text-align:center;
+    text-align: center;
+    background-color: white;
+}
+
+input{
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+button{
+    padding: 8px 12px;
+    margin: 5px;
 }
 
 canvas{
-    border:1px solid black;
+    border: 1px solid black;
+    background-color: white;
 }
 
 </style>
 
 </head>
+
 <body>
 
 <h2>Draw Greeting</h2>
@@ -55,10 +70,11 @@ function start(){
     const name = document.getElementById("name").value;
     const note = document.getElementById("note").value;
 
-    text = name + note;
+    text = name + " " + note;
 
     running = true;
 }
+
 function draw(){
 
     ctx.fillStyle = "white";
@@ -85,8 +101,6 @@ function draw(){
 
     requestAnimationFrame(draw);
 }
-
-
 
 draw();
 
