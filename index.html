@@ -59,32 +59,34 @@ function start(){
 
     running = true;
 }
-
 function draw(){
 
-    if(!running) return;
-
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "white";
     ctx.fillRect(0,0,300,300);
 
-    ctx.fillStyle = black();
-    ctx.font = "20px Arial";
+    if(running){
 
-    ctx.fillText(text,x,y);
+        ctx.fillStyle = randomColor();
+        ctx.font = "20px Arial";
 
-    x += dx;
-    y += dy;
+        ctx.fillText(text,x,y);
 
-    if(x < 0 || x > 200){
-        dx *= -1;
-    }
+        x += dx;
+        y += dy;
 
-    if(y < 20 || y > 280){
-        dy *= -1;
+        if(x < 0 || x > canvas.width - 100){
+            dx *= -1;
+        }
+
+        if(y < 20 || y > canvas.height){
+            dy *= -1;
+        }
     }
 
     requestAnimationFrame(draw);
 }
+
+
 
 draw();
 
