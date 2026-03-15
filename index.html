@@ -54,10 +54,6 @@ canvas{
     <option value="'Brush Script MT', cursive">Brush Script MT</option>
 </select>
 
-<!-- Font size slider -->
-<label for="fontSize">Font Size:</label>
-<input type="range" id="fontSize" min="10" max="100" value="17">
-
 <!-- Font color picker -->
 <input type="color" id="colorPicker" value="#ff0000">
 
@@ -78,28 +74,33 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 let text = "";
-let x = 100;
-let y = 100;
+let x = 0;
+let y = 0;
 let dx = 2;
 let dy = 2;
 let running = false;
 
-// Current styles
+// Fixed font size
+const fontSize = 30;
 let fontFamily = "Georgia";
-let fontSize = 17;
 let fontColor = "#ff0000";
 
 function start(){
     const name = document.getElementById("name").value;
     const note = document.getElementById("note").value;
     text = note + " " + name;
+
+    // Center text
+    ctx.font = `${fontSize}px ${fontFamily}`;
+    x = (canvas.width - ctx.measureText(text).width) / 2;
+    y = canvas.height / 2;
+
     running = true;
 }
 
-// Update live styles
+// Update live styles except font size
 function updateStyles(){
     fontFamily = document.getElementById("fontSelect").value;
-    fontSize = document.getElementById("fontSize").value;
     fontColor = document.getElementById("colorPicker").value;
 
     const mode = document.getElementById("modeSelect").value;
@@ -127,10 +128,12 @@ function draw(){
         x += dx;
         y += dy;
 
+        // Bounce horizontally
         if(x < 0 || x > canvas.width - ctx.measureText(text).width){
             dx *= -1;
         }
 
+        // Bounce vertically
         if(y < fontSize || y > canvas.height){
             dy *= -1;
         }
