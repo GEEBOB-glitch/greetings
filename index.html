@@ -26,7 +26,7 @@ button{
 
 canvas{
     border: 1px solid green;
-    background-color: white;
+    background-color: white; /* always white */
 }
 </style>
 </head>
@@ -98,11 +98,12 @@ function start(){
     running = true;
 }
 
-// Update live styles except font size
+// Update live styles
 function updateStyles(){
     fontFamily = document.getElementById("fontSelect").value;
     fontColor = document.getElementById("colorPicker").value;
 
+    // Live dark/light mode for page only
     const mode = document.getElementById("modeSelect").value;
     if(mode === "dark"){
         document.body.style.backgroundColor = "black";
@@ -114,13 +115,13 @@ function updateStyles(){
 }
 
 function draw(){
+    updateStyles(); // Apply live updates
+
     // Keep canvas background always white
     ctx.fillStyle = "white";
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
     if(running){
-        updateStyles(); // Apply live updates
-
         ctx.font = `${fontSize}px ${fontFamily}`;
         ctx.fillStyle = fontColor;
         ctx.fillText(text,x,y);
